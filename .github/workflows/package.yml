@@ -2,19 +2,21 @@ name: Build and publish NuGet package
 
 on:
   push:
-    branches: ['master']
+    tags: ["[0-9]+.[0-9]+.[0-9]+"]
 
 jobs:
   build:
-    #runs-on: ubuntu/dotnet-aspnet:8.0-24.04_edge
     runs-on: ubuntu-latest
-
-    #permissions:
-    #  contents: read
-    #  packages: write
 
     steps:
     - name: Checkout
       uses: actions/checkout@v4
     - name: Build
-      run: dotnet build --configuration Release
+      run: |
+        dotnet build --configuration Release /p:Version=${{ github.event.release.tag_name }}
+        dotnet pack --configuration Release /p:Version=${{ github.event.release.tag_name }}
+    - name: GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        body: ${{ github.event.workflow_run.head_commit.message }}
+        files: bin/Release/RGBradCSharpTest.${{ github.event.release.tag_name }}.nupkg
