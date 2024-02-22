@@ -13,10 +13,10 @@ jobs:
       uses: actions/checkout@v4
     - name: Build
       run: |
-        dotnet build --configuration Release /p:Version=${{ github.event.release.tag_name }}
-        dotnet pack --configuration Release /p:Version=${{ github.event.release.tag_name }}
+        dotnet build --configuration Release /p:Version=${{ github.ref }}
+        dotnet pack --configuration Release /p:Version=${{ github.ref }}
     - name: GitHub Release
       uses: softprops/action-gh-release@v1
       with:
         body: ${{ github.event.workflow_run.head_commit.message }}
-        files: bin/Release/RGBradCSharpTest.${{ github.event.release.tag_name }}.nupkg
+        files: bin/Release/RGBradCSharpTest.${{ github.ref }}.nupkg
