@@ -1,0 +1,20 @@
+name: Build and publish NuGet package
+
+on:
+  push:
+    branches: ['master']
+
+jobs:
+  build:
+    #runs-on: ubuntu/dotnet-aspnet:8.0-24.04_edge
+    runs-on: ubuntu-latest
+
+    #permissions:
+    #  contents: read
+    #  packages: write
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Build
+      run: dotnet build --configuration Release
