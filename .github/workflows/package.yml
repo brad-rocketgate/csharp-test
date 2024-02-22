@@ -11,12 +11,14 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
+    - name: Set environment
+      run: echo "RELEASE_VERSION=$(git describe --tags)" >> $GITHUB_ENV
     - name: Build
       run: |
-        dotnet build --configuration Release /p:Version=${{ github.ref }}
-        dotnet pack --configuration Release /p:Version=${{ github.ref }}
+        dotnet build --configuration Release /p:Version=${{ env.RELEASE_VERSION }}
+        dotnet pack --configuration Release /p:Version=${{ env.RELEASE_VERSION }}
     - name: GitHub Release
       uses: softprops/action-gh-release@v1
       with:
         body: ${{ github.event.workflow_run.head_commit.message }}
-        files: bin/Release/RGBradCSharpTest.${{ github.ref }}.nupkg
+        files: bin/Release/RGBradCSharpTest.${{ env.RELEASE_VERSION }}.nupkg
