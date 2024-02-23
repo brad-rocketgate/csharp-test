@@ -11,14 +11,23 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-    - name: Set environment
+
+    - name: Environment
       run: echo "RELEASE_VERSION=$(git describe --tags)" >> $GITHUB_ENV
+
     - name: Build
       run: |
         dotnet build --configuration Release /p:Version=${{ env.RELEASE_VERSION }}
         dotnet pack --configuration Release /p:Version=${{ env.RELEASE_VERSION }}
+
     - name: GitHub Release
       uses: softprops/action-gh-release@v1
       with:
         body: ${{ github.event.workflow_run.head_commit.message }}
         files: bin/Release/RGBradCSharpTest.${{ env.RELEASE_VERSION }}.nupkg
+
+    - name: NuGet Release
+      run: |
+        dotnet nuget push NuGet.Workflow.${{ env.RELEASE_VERSION }}.nupkg \
+          --source https://nuget.pkg.github.com/brad-rocketgate/index.json \
+          --api-key ${{ secrets.GITHUB_TOKEN }}

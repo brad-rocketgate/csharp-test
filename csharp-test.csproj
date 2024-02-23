@@ -3,7 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <PackageId>RGBradCSharpTest</PackageId>
-    <Version>1.0.0</Version>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/brad-rocketgate/csharp-test</RepositoryUrl>
     <Authors>Brad Johnson</Authors>
     <Company>RocketGate</Company>
     <RootNamespace>csharp_test</RootNamespace>
