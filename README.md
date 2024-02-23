@@ -9,3 +9,5 @@ GitHub NuGet registry documentation: https://docs.github.com/en/packages/working
 Working example: https://acraven.medium.com/a-nuget-package-workflow-using-github-actions-7da8c6557863
 
 Push to NuGet.org: https://learn.microsoft.com/en-us/nuget/nuget-org/publish-a-package
+
+GitHub secrets (used to store NuGet.org API key): https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-an-organization

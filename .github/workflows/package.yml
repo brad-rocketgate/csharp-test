@@ -37,5 +37,5 @@ jobs:
       run: |
         dotnet nuget push \
           bin/Release/RGBradCSharpTest.${{ env.RELEASE_VERSION }}.nupkg \
-          --source https://api.nuget.org/v3/index.json
-          --api-key ${{ secrets.GITHUB_TOKEN }}
+          --source https://api.nuget.org/v3/index.json \
+          --api-key ${{ secrets.NUGET_TOKEN }}
