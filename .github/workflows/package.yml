@@ -28,6 +28,6 @@ jobs:
 
     - name: NuGet Release
       run: |
-        dotnet nuget push NuGet.Workflow.${{ env.RELEASE_VERSION }}.nupkg \
+        dotnet nuget push RGBradCSharpTest.${{ env.RELEASE_VERSION }}.nupkg \
           --source https://nuget.pkg.github.com/brad-rocketgate/index.json \
           --api-key ${{ secrets.GITHUB_TOKEN }}
